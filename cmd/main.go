@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 	"os"
 
 	"github.com/lucas-rabello-dev/WEB-CRUD.git/server"
 
+	"github.com/fatih/color"
 	"github.com/joho/godotenv"
 )
 
@@ -17,20 +17,30 @@ const (
 	CrudPageWay string = "./templates/crudPage/crudPage.html"
 )
 
+var (
+	success *color.Color = color.New(color.FgGreen).Add(color.Bold, color.Italic)
+	err_ *color.Color = color.New(color.FgRed).Add(color.Bold, color.Italic)
+)
+
 func main() {
 	// Load .env
 	port, host, err := LoadDotEnv()
 	if err != nil {
-		log.Fatal(err)
+		// log.Fatal(err)
+		err_.Printf("Error: %v ❌\n", err)
+		return
 	}
+	success.Println(".env carregado ✅")
+
 	mux := http.NewServeMux()
 
 	mux = server.ServeStaticFiles(mux)
 
 	mux.HandleFunc("/home/", HandleHome)
+	success.Println("'home' carregada ✅")
 
 	mux.HandleFunc("/home/crudPage/", HandleCrud)
-
+	success.Println("'crudPage' carregado ✅")
 
 	fmt.Printf("Rodando em: http://%s:%s\n", host, port)
 	http.ListenAndServe(":" + port, mux)
