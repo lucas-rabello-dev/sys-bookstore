@@ -15,10 +15,16 @@ ____
 isso é uma representação de um botão "menu" para ter as seguintes opções:
 
 Cadastro de livros
+
 Consultar o estoque -> em formato de tabela
+
 Emprestimos
+
 Usuários bloqueados (o usuario é bloqueado quando passar 30 dias sem devolução)
+
 Usuários com multas
+
+--- botão ---
 Sair -> que seria "sair da conta" no caso
 
 model ->
