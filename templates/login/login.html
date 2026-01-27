@@ -7,8 +7,32 @@
   <title>Login</title>
 </head>
 <body>
-  
+    <div align="center">
+        <big><h1>Login Sysbook store</h1></big>
+        
+        <form action="" method="POST">
+            <table cellpadding="8">
+                <tr>
+                    <td align="right"><label for="nome">Digite seu nome:</label></td>
+                    <td><input type="text" id="nome" name="nome" placeholder="Nome" size="30" required></td>
+                </tr>
+                <tr>
+                    <td align="right"><label for="email">Digite seu email:</label></td>
+                    <td><input type="text" id="email" name="email" placeholder="Email" size="30" required></td>
+                </tr>
+                <tr>
+                    <td align="right"><label for="senha">Digite sua senha:</label></td>
+                    <td><input type="password" id="senha" name="senha" placeholder="Senha" size="30" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <br>
+                        <input type="submit" value="Entrar">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>
 </html>
-
 {{ end }}
