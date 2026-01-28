@@ -1,16 +1,17 @@
-{{ define "login"}}
+{{ define "cadastro" }}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Cadastro</title>
 </head>
 <body>
     <div align="center">
-        <big><h1>Login Sysbook store</h1></big>
-        
-        <form action="" method="POST">
+        <big>
+            <h1>Cadastro Sysbook Store</h1>
+        </big>
+        <form action="/auth/processar-cadastro/" method="POST">
             <table cellpadding="8">
                 <tr>
                     <td align="right"><label for="nome">Digite seu nome:</label></td>
@@ -18,7 +19,18 @@
                 </tr>
                 <tr>
                     <td align="right"><label for="email">Digite seu email:</label></td>
-                    <td><input type="text" id="email" name="email" placeholder="Email" size="30" required></td>
+                    <td>
+                        <input type="email" 
+                               id="email" 
+                               name="email" 
+                               placeholder="exemplo@email.com" 
+                               size="30" 
+                               required
+                               pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+                               title="Digite um email válido (ex: usuario@gmail.com)"
+                               oninvalid="this.setCustomValidity('Por favor, insira um email válido')"
+                               oninput="this.setCustomValidity('')">
+                    </td>
                 </tr>
                 <tr>
                     <td align="right"><label for="senha">Digite sua senha:</label></td>
@@ -27,13 +39,16 @@
                 <tr>
                     <td colspan="2" align="center">
                         <br>
-                        <input type="submit" value="Entrar"><br><br>
-                        Não tem cadastro? <a href="/auth/cadastro/" >clique aqui</a>
+                        <input type="submit" value="Cadastrar"><br><br>
+                        Tem cadastro? <a href="/auth/login">clique aqui</a>
                     </td>
                 </tr>
             </table>
         </form>
+        
     </div>
 </body>
+
 </html>
 {{ end }}
+

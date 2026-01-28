@@ -18,12 +18,18 @@ func (l *Livro) CalcularMulta(valorOriginal float64) {
 }
 
 type User struct {
-	NomeCompleto string
-	Idade        int
-	CPF          string
+	Nome         string
 	Email        string
-	Email_Rec    string // email de recuperação se precisar
-	senha        string
+	Senha        string
+}
+
+func SetUser(nome, email, senha string) *User {
+	user :=  &User{
+		Nome: nome,
+		Email: email,
+		Senha: senha,
+	}
+	return user
 }
 
 // escrever o getter e setter para o atributo senha

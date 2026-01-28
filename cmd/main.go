@@ -38,7 +38,7 @@ func main() {
 	mux.HandleFunc("/home/cadastro-livro/", handlers.HandleCadastroLivro)
 	success.Println("'cadastro-livro' carregado [OK]")
 
-	mux.HandleFunc("/", handlers.HandleLogin)
+	mux.HandleFunc("/auth/login/", handlers.HandleLogin)
 	success.Println("'login' carregado [OK]")
 
 	mux.HandleFunc("/home/multas/", handlers.HandleMultas)
@@ -52,6 +52,10 @@ func main() {
 
 	mux.HandleFunc("/home/bloqueados/", handlers.HandleBloqueados)
 	success.Println("'bloqueados' carregado [OK]")
+	
+	mux.HandleFunc("/auth/cadastro/", handlers.HandleCadastro)
+	
+	mux.HandleFunc("/auth/processar-cadastro/", handlers.ProcessarCadastro)
 
 	fmt.Printf("Rodando em: http://%s:%s\n", host, port)
 	http.ListenAndServe(":" + port, mux)

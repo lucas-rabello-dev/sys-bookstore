@@ -1,9 +1,13 @@
 package handlers
 
 import (
-	"net/http"
 	"html/template"
+	"log"
+	"net/http"
+
 	"github.com/fatih/color"
+
+	"github.com/lucas-rabello-dev/WEB-CRUD.git/model"
 )
 
 const (
@@ -14,6 +18,7 @@ const (
 	EstoqueWay string = "./templates/estoque/estoque.html"
 	EmprestimosWay string = "./templates/emprestimos/emprestimos.html"
 	BloqueadosWay string = "./templates/bloqueados/bloqueados.html"
+	CadastroWay string = "./templates/cadastro/cadastro.html"
 )
 
 var (
@@ -68,7 +73,7 @@ func HandleCadastroLivro(w http.ResponseWriter, r *http.Request) {
 
 func HandleLogin(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
-	case "/":
+	case "/auth/login", "/auth/login/":
 		if r.Method != http.MethodGet {
 			w.Header().Set("Allow", http.MethodGet)
 			http.Error(w, "método inválido | método diferente de GET", http.StatusMethodNotAllowed)
@@ -176,6 +181,61 @@ func HandleBloqueados(w http.ResponseWriter, r *http.Request) {
 
 		w.WriteHeader(http.StatusOK)
 		t.ExecuteTemplate(w, "bloqueados", nil)
+	default:
+		http.NotFound(w, r)
+	}
+}
+
+func HandleCadastro(w http.ResponseWriter, r *http.Request) {
+	switch r.URL.Path {
+	case "/auth/cadastro", "/auth/cadastro/":
+		if r.Method != http.MethodGet {
+			w.Header().Set("Allow", http.MethodGet)
+			http.Error(w, "método inválido | metodo diferente de Get", http.StatusInternalServerError)
+			return 
+		}
+		
+		t, err := template.ParseFiles(CadastroWay)
+		if err != nil {
+			http.Error(w, "error ao carregar html", http.StatusInternalServerError)
+			return
+		}
+		
+		w.WriteHeader(http.StatusOK)
+		t.ExecuteTemplate(w, "cadastro", nil)
+	default:
+		http.NotFound(w, r)
+	}
+}
+
+func ProcessarCadastro(w http.ResponseWriter, r *http.Request) {
+	switch r.URL.Path {
+	case "/auth/processar-cadastro/", "/auth/processar-cadastro": 
+		if r.Method != http.MethodPost {
+			http.Error(w, "metodo nao permitido", http.StatusMethodNotAllowed)
+			return
+		}
+	
+		// parsear o formulario
+		err := r.ParseForm()
+		if err != nil {
+			http.Error(w, "nao foi possivel parsear o formulario", http.StatusInternalServerError)
+			return
+		}
+		
+		var (
+			nome = r.FormValue("nome")
+			email = r.FormValue("email")
+			senha = r.FormValue("senha")
+		)
+		
+		// Create user
+		debug := model.SetUser(nome, email, senha)
+		
+		
+		log.Println(debug.Nome, debug.Email, debug.Senha, "deu certo")
+		
+		http.Redirect(w, r, "/auth/login/", http.StatusSeeOther)
 	default:
 		http.NotFound(w, r)
 	}
