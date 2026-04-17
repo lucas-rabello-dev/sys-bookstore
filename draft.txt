@@ -30,12 +30,16 @@ Sair -> que seria "sair da conta" no caso
 model ->
     título
     autor
-    ano de publicação
+    Idioma
     número de páginas
+    editora
     genêro
+    ano de publicação
     Classificação
     Quantidade
+    link(s) para comprar
     Sinopse
+    Valor da multa diaria
     
     ---- no front ---- 
     adicionar capa -> botão ai você precisa carregar uma imagem local para usar 

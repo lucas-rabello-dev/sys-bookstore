@@ -8,6 +8,8 @@ type Livro struct {
 	Editora          string
 	Genero           string
 	AnoPublicacao    string   // data de publicação do livro
+	Classificacao    string
+	Quantidade       int
 	LinkCompra       []string // pode ser um ou mais
 	Sinopse          string
 	ValorMultaDiaria float64

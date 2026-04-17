@@ -57,7 +57,7 @@ func main() {
 	
 	mux.HandleFunc("/auth/processar-cadastro/", handlers.ProcessarCadastro)
 
-	fmt.Printf("Rodando em: http://%s:%s\n", host, port)
+	fmt.Printf("Rodando em: http://%s:%s/home/\n", host, port)
 	http.ListenAndServe(":" + port, mux)
 }
 

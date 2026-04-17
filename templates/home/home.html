@@ -7,7 +7,27 @@
   <title>Home</title>
 </head>
 <body>
-  
+    
+  <button onclick="window.location.href='/auth/login/'" class="botao";>Ir para login</button>
+  <br>
+  <a href="/home/cadastro-livro/">ir para cadastro de livros</a>
+
+    <style>
+        .botao {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+
+        .botao:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
 </body>
 </html>
 {{ end }}
